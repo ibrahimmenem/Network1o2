@@ -1,0 +1,40 @@
+~/src/Network1o2$ ansible-playbook iosxe.yml 
+
+PLAY [csrs] ********************************************************************
+
+TASK [setup] *******************************************************************
+ok: [sdnlabcsr2]
+ok: [sdnlabcsr1]
+
+TASK [show processes] **********************************************************
+ok: [sdnlabcsr1]
+ok: [sdnlabcsr2]
+
+TASK [version test] ************************************************************
+ok: [sdnlabcsr2]
+ok: [sdnlabcsr1]
+
+TASK [print stuff] *************************************************************
+ok: [sdnlabcsr2] => {
+    "msg": [
+        "System sdnlabcsr2", 
+        "show processes CPU utilization for five seconds: 0%/0%; one minute: 0%; five minutes: 0%", 
+        "System sdnlabcsr2", 
+        "version Cisco IOS XE Software, Version 03.15.01.S - Standard Support Release", 
+        "uptime sdnlabcsr1 uptime is 31 weeks, 6 days, 19 hours, 6 minutes"
+    ]
+}
+ok: [sdnlabcsr1] => {
+    "msg": [
+        "System sdnlabcsr1", 
+        "show processes CPU utilization for five seconds: 0%/0%; one minute: 0%; five minutes: 0%", 
+        "System sdnlabcsr1", 
+        "version Cisco IOS XE Software, Version 03.15.01.S - Standard Support Release", 
+        "uptime sdnlabcsr2 uptime is 37 weeks, 5 days, 18 hours, 35 minutes"
+    ]
+}
+
+PLAY RECAP *********************************************************************
+sdnlabcsr1                 : ok=4    changed=0    unreachable=0    failed=0   
+sdnlabcsr2                 : ok=4    changed=0    unreachable=0    failed=0   
+

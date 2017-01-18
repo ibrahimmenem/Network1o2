@@ -1,0 +1,29 @@
+---
+- hosts: csrs
+  connection: local
+  vars:
+    default_connection:
+      host: "{{inventory_hostname}}"
+      username: tog
+      password: tog
+
+  tasks:
+  - name: show processes
+    ios_command:
+      commands: "show processes"
+      provider: "{{ default_connection }}"
+    register: cpu_res 
+
+  - name: version test
+    ios_command:
+      commands: "show version"
+      provider: "{{ default_connection }}"
+    register: ver_res
+
+  - name: print stuff 
+    debug:
+      msg: ["System {{ inventory_hostname }}",
+            "show processes {{ cpu_res.stdout_lines[0][0] }}", 
+            "System {{ inventory_hostname }}",
+            "version {{ ver_res.stdout_lines[0][0] }}",
+            "uptime {{ver_res.stdout_lines[0][20]  }}"]
